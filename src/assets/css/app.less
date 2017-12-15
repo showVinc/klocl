@@ -1,0 +1,79 @@
+
+/*公共样式*/
+body{
+  background: #f4f4f4;
+}
+p,span,div,li:hover{
+  cursor: pointer;
+}
+
+input{
+  margin: 0!important;
+  font-size: 14px;
+  border:none;
+}
+//鼠标经过变手
+ul{
+  li{
+    &:hover{
+      cursor:pointer
+    }
+  }
+}
+
+input::-webkit-input-placeholder {
+  /* placeholder颜色  */
+  color: #212125;
+  /* placeholder字体大小  */
+  font-size: 14px;
+  /* placeholder位置  */
+}
+
+textarea::-webkit-input-placeholder{
+  /* placeholder颜色  */
+  color: #212125;
+  /* placeholder字体大小  */
+  font-size: 14px;
+  /* placeholder位置  */
+}
+
+*,p,div,span,a,input,select{
+  padding: 0;
+  margin: 0;
+}
+li{
+  list-style: none;
+}
+
+.fade-enter-active,.fade-leave-active {
+  transition: all 0.3s linear;
+}
+.fade-enter,.fade-leave-active {
+  opacity: 0;
+  transform:translateX(15px);
+}
+
+//验证错误时提示
+.errInfo{
+  /*min-height: 30px;*/
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 14px;
+  p{
+    margin: 0!important;
+    color: #d23c3c!important;
+  }
+}
+
+input{
+  padding-left: 15px;
+  box-sizing: border-box;
+  &.active:focus {
+    outline:none!important;
+    border: 1px solid red!important;
+  }
+}
+
+
+
