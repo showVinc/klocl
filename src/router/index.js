@@ -35,6 +35,11 @@ export default new Router({
       path: '/login/register',
       name: 'LoginRegister',
       component: resolve=>require(['@/pages/Login/Register'],resolve)
+    },
+    {
+      path: '/login/success',
+      name: 'LoginSuccess',
+      component: resolve=>require(['@/pages/Login/Success'],resolve)
     }
   ]
 })

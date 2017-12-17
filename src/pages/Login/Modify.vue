@@ -76,7 +76,7 @@
             message:'修改成功',
             type: 'success'
           });
-          self.$router.push('/login')
+          self.$router.push('/login/success?key=2')
         }
       }
     }

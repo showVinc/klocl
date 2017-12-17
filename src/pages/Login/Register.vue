@@ -68,10 +68,6 @@
           self.msg = '郵箱輸入有誤！'
           this.$refs['inputEmail'].focus()
           self.isEmail = true
-        }else if(!self.post.password){
-          self.msg = '密碼不能為空！'
-          self.isPassword = true
-          this.$refs['inputPassword'].focus()
         }
 
         if(self.msg){
@@ -81,6 +77,7 @@
             message:'登錄成功',
             type: 'success'
           });
+          self.$router.push('/login/success?key=1')
         }
       }
     }

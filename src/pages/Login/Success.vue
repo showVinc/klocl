@@ -3,21 +3,15 @@
     <head-public></head-public>
     <div class="modifyMain">
       <div class="modifyTit">
-        找回密码
+        {{title}}
       </div>
-      <div class="modifyWrap">
-        <div class="inputShow">
-          <span>郵箱</span>
-          <input type="text" v-model="post.email" :class="{'active':isShow}"  ref="input" @blur="emailBlur">
-          <div class="errInfo">
-            <transition name="fade">
-              <p v-show="isShow">{{msg}}</p>
-            </transition>
-          </div>
-          <p>（邮箱用于接收修改密码的链接，请务必填写本人邮箱）</p>
+      <div class="successWrap">
+        <div class="successMain">
+          <img src="../../assets/images/public_img/arrow.png">
+          <p>恭喜你！已经获得鉴定中心账号！5s后返回首页。</p>
         </div>
-        <div class="isLogin" @click="sub">
-          發送鏈接
+        <div class="isLogin" @click="$router.push('/login')">
+          {{subBtn}}
         </div>
       </div>
     </div>
@@ -30,6 +24,8 @@
       return {
         isShow:false,
         msg:'',
+        title:'',
+        subBtn:'',
         post:{
           email:''
         }
@@ -67,6 +63,15 @@
           self.$router.push('/login/modify')
         }
       }
+    },
+    mounted(){
+      if(this.$fun.GetQueryString('key','login/success')==1){
+        this.title = '注册成功'
+        this.subBtn = '返回首页'
+      }else if(this.$fun.GetQueryString('key','login/success')==2){
+        this.title = '修改成功'
+        this.subBtn = '去登录'
+      }
     }
   }
 </script>
@@ -80,32 +85,23 @@
         margin-bottom: 40px;
       }
     }
-    .modifyWrap{
+    .successWrap{
       font-size: 14px;
-      .inputShow {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 15px;
-        span{
-          margin-bottom: 10px;
-        }
-        input {
-          border: 1px solid #f2f2f2;
-          background: #fafafa;
-          width: 500px;
-          height: 40px;
+      .successMain{
+        img{
+          width: 47px;
+          height: 36px;
+          display: block;
         }
         p{
-          font-size: 14px;
-          color: #999;
+          color: #333;
           margin-top: 15px;
         }
       }
       .isLogin{
-        width: 200px;
+        width: 100px;
         height: 40px;
-        background: #212125;
+        background: #333;
         color: #fafafa;
         display: flex;
         align-items: center;
