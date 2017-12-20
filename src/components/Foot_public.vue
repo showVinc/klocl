@@ -3,7 +3,7 @@
     <div class="footLeft">
       圖片
       <span>
-        版權歸第三方鑒定所©2017
+        {{$t('copyright')}}
       </span>
     </div>
     <div class="footRight">
@@ -21,24 +21,24 @@
       return {
         footList:[
           {
-            name:'關於我們',
+            name:this.$t('foot1'),
           }, {
-            name:'新聞室',
+            name:this.$t('foot2'),
           },{
-            name:'常見問題',
+            name:this.$t('foot3'),
           },{
-            name:'地址',
+            name:this.$t('foot4'),
           },{
-            name:'聯繫我們',
+            name:this.$t('foot5'),
           },{
-            name:'使命與原理',
+            name:this.$t('foot6'),
           }
         ]
       }
     }
   }
 </script>
-<style lang="less" type="text/less">
+<style lang="less" type="text/less" scoped>
   .publicFoot{
     height: 120px;
     background: #212125;

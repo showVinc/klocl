@@ -5,7 +5,7 @@
     </div>
     <div class="headRight">
       <div class="selLang">
-        <el-select v-model="value" placeholder="请选择">
+        <el-select v-model="value" :placeholder="$t('choice')">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -15,12 +15,12 @@
         </el-select>
       </div>
       <div class="searchTop">
-        <input type="text" placeholder="搜索">
+        <input type="text" :placeholder="$t('search')">
         <span>
           <img src="../assets/images/public_img/search.png">
         </span>
       </div>
-      <div class="login" @click="$router.push('/login')">
+      <div class="loginBtn" @click="$router.push('/login')">
         登錄
       </div>
     </div>
@@ -45,13 +45,20 @@
 <style lang="less" type="text/less" scoped>
   .publicTop{
     width: 100%;
+    margin: 0 auto;
+    max-width: 1200px;
+    min-width: 1024px;
     height: 90px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 0 50px;
-    position: relative;
+    position: fixed;
+    top: 0;
+    /*left: 0;*/
+    background: #fff;
+    z-index: 999;
     &:before{
       content: '';
       position: absolute;
@@ -76,6 +83,8 @@
           background: #f2f2f2;
           padding-left: 15px;
           box-sizing: border-box;
+          border: none;
+          outline: none;
         }
         span{
           width: 40px;
@@ -91,7 +100,7 @@
           }
         }
       }
-      .login{
+      .loginBtn{
         min-width: 110px;
         height: 40px;
         display: flex;
@@ -113,7 +122,7 @@
     .el-input__inner{
       border:none!important;
       color: #212125;
-      width: 130px;
+      width: 100px;
     }
   }
   .el-select-dropdown__item.selected.hover{

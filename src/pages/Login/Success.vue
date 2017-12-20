@@ -7,8 +7,9 @@
       </div>
       <div class="successWrap">
         <div class="successMain">
-          <img src="../../assets/images/public_img/arrow.png">
-          <p>恭喜你！已经获得鉴定中心账号！5s后返回首页。</p>
+          <img src="../../assets/images/public_img/success.png">
+          <p v-if="key==1">恭喜你！已经获得鉴定中心账号！{{num}}s后返回首页。</p>
+          <p v-if="key==2">密码修改成功，请重新登录！{{num}}s后进入登录页。</p>
         </div>
         <div class="isLogin" @click="$router.push('/login')">
           {{subBtn}}
@@ -24,6 +25,8 @@
       return {
         isShow:false,
         msg:'',
+        key:'',
+        num:5,
         title:'',
         subBtn:'',
         post:{
@@ -41,37 +44,49 @@
         let regEmail = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
         self.msg = ''
         if(!self.post.email){
-          self.msg = '郵箱不能為空！'
+          self.msg = this.$t('noEmail')
         }else if(!regEmail.test(self.post.email)){
-          self.msg = '郵箱輸入有誤！'
+          self.msg = this.$t('errEmail')
         }
 
         if(self.msg){
-//          self.$notify({
-//            message:msg,
-//            type: 'warning'
-//          });
           self.isShow = true
           this.$refs['input'].focus()
           return false
         }else{
           self.isShow = false
           self.$notify({
-            message:'发送成功',
+            message:this.$t('postSuccess'),
             type: 'success'
           });
           self.$router.push('/login/modify')
         }
       }
     },
-    mounted(){
-      if(this.$fun.GetQueryString('key','login/success')==1){
-        this.title = '注册成功'
-        this.subBtn = '返回首页'
-      }else if(this.$fun.GetQueryString('key','login/success')==2){
-        this.title = '修改成功'
-        this.subBtn = '去登录'
+    created(){
+      let self = this
+      if(self.$fun.GetQueryString('key','login/success')==1){
+        self.title = this.$t('registerSuccess')
+        self.subBtn = this.$t('goHome')
+      }else if(self.$fun.GetQueryString('key','login/success')==2){
+        self.title = this.$t('modifySuccess')
+        self.subBtn = this.$t('goLogin')
+      }else{
+        self.$router.push('/login')
+        return false
       }
+      self.key = self.$fun.GetQueryString('key','login/success')
+      let timeShow = setInterval(function () {
+        if (self.num <= 0) {
+          self.$router.push('/login')
+          clearInterval(timeShow)
+        } else {
+          self.num--
+        }
+      }, 1000)
+
+    },
+    mounted(){
     }
   }
 </script>

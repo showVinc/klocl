@@ -3,12 +3,12 @@
     <head-public></head-public>
     <div class="loginMain">
       <div class="loginTit">
-        註冊
+        {{$t('register')}}
       </div>
       <div class="mainWrap">
         <div class="mainLeft">
           <div class="inputShow">
-            <span>郵箱*</span>
+            <span>{{$t('email')}}*</span>
             <input type="text" v-model="post.email" :class="{'active':isEmail}" ref="inputEmail" @blur="errBlur">
             <div class="errInfo">
               <transition name="fade">
@@ -17,19 +17,19 @@
             </div>
           </div>
           <div class="registerText">
-            <p>1、郵箱用於接收註冊賬號的激活鏈接，請務必填寫本人郵箱；</p>
-            <p>2、如郵箱填寫正確后仍無法收到郵件，請嘗試到郵箱垃圾箱/草稿箱中查看。</p>
+            <p>{{$t('registerText1')}}</p>
+            <p>{{$t('registerText2')}}</p>
           </div>
           <div class="isLogin">
             <div @click="sub">
-              發送鏈接
+              {{$t('postLink')}}
             </div>
           </div>
         </div>
         <div class="mainRight">
-          <p>已有賬號</p>
+          <p>{{$t('alreadyAccount')}}</p>
           <div @click="$router.push('/login')">
-            去登錄
+            {{$t('goLogin')}}
           </div>
         </div>
       </div>
@@ -42,6 +42,8 @@
     data() {
       return {
         msg:'',
+        token:'',
+        sid:'',
         isEmail:false,
         isPassword:false,
         post:{
@@ -61,11 +63,11 @@
         self.msg = ''
         let regEmail = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
         if(!self.post.email){
-          self.msg = '郵箱不能為空！'
+          self.msg = this.$t('noEmail')
           self.isEmail = true
           this.$refs['inputEmail'].focus()
         }else if(!regEmail.test(self.post.email)){
-          self.msg = '郵箱輸入有誤！'
+          self.msg =this.$t('errEmail')
           this.$refs['inputEmail'].focus()
           self.isEmail = true
         }
@@ -73,13 +75,23 @@
         if(self.msg){
           return false
         }else{
-          self.$notify({
-            message:'登錄成功',
-            type: 'success'
-          });
-          self.$router.push('/login/success?key=1')
+          this.$http.post(`http://192.168.10.131/verifycenter/controller.php?c=ru&token=${this.token}&PHPSESSID=${this.sid}`,{email:self.post.email}).then(res=>{
+            self.$notify({
+              message:this.$t('postSuccess'),
+              type: 'success'
+            });
+          }).catch(err=>{
+            console.log(err)
+          })
+//          self.$router.push(`/login/password?email=${self.post.email}`)
         }
       }
+    },
+    mounted(){
+      setTimeout(()=>{
+        this.token = sessionStorage.getItem('token')
+        this.sid = sessionStorage.getItem('sid')
+      },300)
     }
   }
 </script>

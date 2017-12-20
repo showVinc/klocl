@@ -3,11 +3,11 @@
     <head-public></head-public>
     <div class="modifyMain">
       <div class="modifyTit">
-        修改密碼
+        {{$t('modifyPassword')}}
       </div>
       <div class="modifyWrap">
         <div class="inputShow">
-          <span>新密碼*</span>
+          <span>{{$t('newPassword')}}*</span>
           <input type="password" v-model="post.password" :class="{'active':password}" ref="password" @blur="errBlur">
           <div class="errInfo">
             <transition name="fade">
@@ -16,7 +16,7 @@
           </div>
         </div>
         <div class="inputShow">
-          <span>確認密碼*</span>
+          <span>{{$t('confirmPassword')}}*</span>
           <input type="password" v-model="post.passwordsure" :class="{'active':passwordsure}" ref="passwordsure" @blur="errBlur">
           <div class="errInfo">
             <transition name="fade">
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="isLogin" @click="sub">
-          確認
+          {{$t('confirm')}}
         </div>
       </div>
     </div>
@@ -40,6 +40,7 @@
         password:false,
         passwordsure:false,
         post:{
+          email:'',
           password:'',
           passwordsure:''
         }
@@ -55,15 +56,15 @@
         let self = this
         self.msg = ''
         if(!self.post.password){
-          self.msg = '新密碼不能為空！'
+          self.msg = this.$t('noNewPassword')
           self.password = true
           this.$refs['password'].focus()
         }else if(!self.post.passwordsure){
-          self.msg = '確認密碼不能為空！'
+          self.msg = this.t('noConfirmPassword')
           self.passwordsure = true
           this.$refs['passwordsure'].focus()
         }else if(self.post.password!=self.post.passwordsure){
-          self.msg = '兩次密碼輸入不一致！'
+          self.msg = this.$t('atypism')
           self.passwordsure = true
           this.$refs['passwordsure'].focus()
         }
@@ -73,12 +74,15 @@
           return false
         }else{
           self.$notify({
-            message:'修改成功',
+            message:this.$t('modifySuccess'),
             type: 'success'
           });
-          self.$router.push('/login/success?key=2')
+//          self.$router.push('/login/success?key=2')
         }
       }
+    },
+    mounted(){
+      this.post.email = this.$fun.GetQueryString('email','login/modify')
     }
   }
 </script>

@@ -3,21 +3,21 @@
     <head-public></head-public>
     <div class="modifyMain">
       <div class="modifyTit">
-        找回密码
+        {{$t('backPassword')}}
       </div>
       <div class="modifyWrap">
         <div class="inputShow">
-          <span>郵箱</span>
+          <span>{{$t('email')}}</span>
           <input type="text" v-model="post.email" :class="{'active':isShow}"  ref="input" @blur="emailBlur">
           <div class="errInfo">
             <transition name="fade">
               <p v-show="isShow">{{msg}}</p>
             </transition>
           </div>
-          <p>（邮箱用于接收修改密码的链接，请务必填写本人邮箱）</p>
+          <p>{{$t('emailPrompt')}}</p>
         </div>
         <div class="isLogin" @click="sub">
-          發送鏈接
+          {{$t('postLink')}}
         </div>
       </div>
     </div>
@@ -45,9 +45,9 @@
         let regEmail = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
         self.msg = ''
         if(!self.post.email){
-          self.msg = '郵箱不能為空！'
+          self.msg = this.$t('noEmail')
         }else if(!regEmail.test(self.post.email)){
-          self.msg = '郵箱輸入有誤！'
+          self.msg = this.$t('errEmail')
         }
 
         if(self.msg){
@@ -61,10 +61,10 @@
         }else{
           self.isShow = false
           self.$notify({
-            message:'发送成功',
+            message:this.$t('postSuccess'),
             type: 'success'
           });
-          self.$router.push('/login/modify')
+          self.$router.push(`/login/modify?email=${self.post.email}`)
         }
       }
     }

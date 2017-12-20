@@ -23,7 +23,7 @@ ul{
 
 input::-webkit-input-placeholder {
   /* placeholder颜色  */
-  color: #212125;
+  color: #999;
   /* placeholder字体大小  */
   font-size: 14px;
   /* placeholder位置  */
@@ -74,6 +74,121 @@ input{
     border: 1px solid red!important;
   }
 }
+
+.login{
+  margin-top: -60px;
+}
+.modify{
+  margin-top: -60px;
+}
+
+//公共内容部分
+.publicMain{
+  padding: 60px 50px;
+}
+
+//公共顶部轮播图
+.bgImg{
+  width: 100%;
+  padding: 0 50px 60px;
+  box-sizing: border-box;
+  position: relative;
+  border-bottom: 1px solid #f2f2f2;
+  div{
+    position: absolute;
+    width: 300px;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: calc(~'50% - 40px');
+    left: calc(~'50% - 150px');
+    font-size: 42px;
+    color: #ebebeb;
+    p{
+      position: relative;
+      height: 100%;
+      &:before{
+        width: 60px;
+        height: 4px;
+        background: #fff;
+        content: '';
+        position: absolute;
+        bottom:0;
+        left: calc(~'50% - 30px');
+      }
+    }
+  }
+  img{
+    width: 100%;
+  }
+}
+
+// 轮播样式
+.topBanner{
+  padding: 0 50px 60px;
+  border-bottom: 1px solid #f2f2f2;
+  .el-carousel__container{
+    height: 500px;
+  }
+  .el-carousel__indicators--outside {
+    bottom: 26px;
+    text-align: center;
+    position: static;
+    -ms-transform: none;
+    transform: none;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 30px;
+  }
+  .el-carousel__button {
+    display: block;
+    opacity: .48;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+  }
+}
+
+//修改分頁樣式
+.pages{
+  .el-pager{
+    li{
+      background: #ebebeb!important;
+      margin: 0 5px!important;
+      border: none!important;
+      &:hover{
+        color: #999!important;
+      }
+      &.active{
+        background-color: #333!important;
+      }
+    }
+  }
+  .btn-prev{
+    border: none!important;
+    background: #ebebeb!important;
+    &:hover{
+      color: #999!important;
+    }
+    .el-icon-arrow-left{
+      color: #999;
+    }
+  }
+  .btn-next{
+    border: none!important;
+    background: #ebebeb!important;
+    &:hover{
+      color: #999!important;
+    }
+    .el-icon-arrow-right{
+      color: #999;
+    }
+  }
+}
+
 
 
 

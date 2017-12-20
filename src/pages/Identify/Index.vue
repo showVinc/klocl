@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <head-public></head-public>
-    <nav-public :type="1"></nav-public>
+    <nav-public :type="2"></nav-public>
     <div>
-      我是首頁內容
+      鉴定
     </div>
     <like-public></like-public>
     <foot-public></foot-public>

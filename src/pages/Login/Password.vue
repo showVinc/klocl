@@ -3,17 +3,17 @@
     <head-public></head-public>
     <div class="modifyMain">
       <div class="modifyTit">
-        設置密碼
+        {{$t('settingPassword')}}
       </div>
       <div class="modifyWrap">
         <div class="inputShow">
-          <span>郵箱</span>
+          <span>{{$t('email')}}</span>
           <div class="tit">
             {{post.email}}
           </div>
         </div>
         <div class="inputShow">
-          <span>新密碼*</span>
+          <span>{{$t('newPassword')}}*</span>
           <input type="password" v-model="post.password" :class="{'active':password}" ref="password" @blur="errBlur">
           <div class="errInfo">
             <transition name="fade">
@@ -22,7 +22,7 @@
           </div>
         </div>
         <div class="inputShow">
-          <span>確認密碼*</span>
+          <span>{{$t('confirmPassword')}}*</span>
           <input type="password" v-model="post.passwordsure" :class="{'active':passwordsure}" ref="passwordsure" @blur="errBlur">
           <div class="errInfo">
             <transition name="fade">
@@ -31,7 +31,7 @@
           </div>
         </div>
         <div class="isLogin" @click="sub">
-          確認
+          {{$t('confirm')}}
         </div>
       </div>
     </div>
@@ -43,6 +43,8 @@
     data() {
       return {
         msg:'',
+        token:'',
+        sid:'',
         password:false,
         passwordsure:false,
         post:{
@@ -62,15 +64,15 @@
         let self = this
         self.msg = ''
         if(!self.post.password){
-          self.msg = '新密碼不能為空！'
+          self.msg = this.$t('noNewPassword')
           self.password = true
           this.$refs['password'].focus()
         }else if(!self.post.passwordsure){
-          self.msg = '確認密碼不能為空！'
+          self.msg = this.$t('noConfirmPassword')
           self.passwordsure = true
           this.$refs['passwordsure'].focus()
         }else if(self.post.password!=self.post.passwordsure){
-          self.msg = '兩次密碼輸入不一致！'
+          self.msg = this.$t('atypism')
           self.passwordsure = true
           this.$refs['passwordsure'].focus()
         }
@@ -79,21 +81,37 @@
 
           return false
         }else{
-          self.$notify({
-            message:'修改成功',
-            type: 'success'
-          });
-          self.$router.push('/login')
+          this.$http.post(`http://192.168.10.131/verifycenter/controller.php?c=up&token=${this.token}&PHPSESSID=${this.sid}`,{email:self.post.email,password:self.post.password}).then(res=>{
+            if(res.data.code==40001){
+              self.$notify({
+                message:this.$t('settingSuccess'),
+                type: 'success'
+              });
+              self.$router.push('/login/success?key=1')
+            }else{
+              self.$notify({
+                message:this.$t('settingError'),
+                type: 'success'
+              });
+            }
+          }).catch(err=>{
+            console.log(err)
+          })
         }
       }
     },
     mounted(){
-      this.post.email = this.$fun.GetQueryString('email','login/password')|| '1104923110@qq.com'
+      this.post.email = this.$fun.GetQueryString('email','login/password')
+      setTimeout(()=>{
+        this.token = sessionStorage.getItem('token')
+        this.sid = sessionStorage.getItem('sid')
+      },300)
     }
   }
 </script>
 <style type="text/less" lang="less">
   .modify{
+    margin-top: -60px;
     .modifyMain {
       padding: 60px 50px 0;
       color: #333;

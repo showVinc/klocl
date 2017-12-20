@@ -1,9 +1,17 @@
 <template>
   <div class="home">
     <head-public></head-public>
-    <nav-public :type="1"></nav-public>
-    <div>
-      我是首頁內容
+    <nav-public :type="4" name="地點"></nav-public>
+    <div class="bgImg">
+      <img src="../../assets/images/watch/watch.png">
+      <div>
+        <p>
+          關於我們
+        </p>
+      </div>
+    </div>
+    <div class="publicMain">
+      关于我们
     </div>
     <like-public></like-public>
     <foot-public></foot-public>

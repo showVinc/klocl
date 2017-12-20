@@ -3,12 +3,12 @@
     <head-public></head-public>
     <div class="loginMain">
       <div class="loginTit">
-        登錄
+        {{$t('login')}}
       </div>
       <div class="mainWrap">
         <div class="mainLeft">
           <div class="inputShow">
-            <span>郵箱</span>
+            <span>{{$t('email')}}</span>
             <input type="text" v-model="post.email" :class="{'active':isEmail}" ref="inputEmail" @blur="errBlur">
             <div class="errInfo">
               <transition name="fade">
@@ -17,7 +17,7 @@
             </div>
           </div>
           <div class="inputShow">
-            <span>密碼</span>
+            <span>{{$t('password')}}</span>
             <input type="password" v-model="post.password" :class="{'active':isPassword}" ref="inputPassword" @blur="errBlur">
             <div class="errInfo">
               <transition name="fade">
@@ -27,18 +27,18 @@
           </div>
           <div class="isLogin">
             <div @click="sub">
-              登錄
+              {{$t('login')}}
             </div>
             <span @click="$router.push('/login/back')">
               <img src="../../assets/images/public_img/arrow.png" alt="">
-              忘記密碼
+            {{$t('forgetPassword')}}
             </span>
           </div>
         </div>
         <div class="mainRight">
-          <p>還沒有賬號</p>
+          <p>{{$t('noAccount')}}</p>
           <div @click="$router.push('/login/register')">
-            去註冊
+            {{$t('goRegister')}}
           </div>
         </div>
       </div>
@@ -51,6 +51,8 @@
     data() {
       return {
         msg:'',
+        token:'',
+        sid:'',
         isEmail:false,
         isPassword:false,
         post:{
@@ -70,15 +72,15 @@
         self.msg = ''
         let regEmail = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
         if(!self.post.email){
-          self.msg = '郵箱不能為空！'
+          self.msg = this.$t('noEmail')
           self.isEmail = true
           this.$refs['inputEmail'].focus()
         }else if(!regEmail.test(self.post.email)){
-          self.msg = '郵箱輸入有誤！'
+          self.msg = this.$t('errEmail')
           this.$refs['inputEmail'].focus()
           self.isEmail = true
         }else if(!self.post.password){
-          self.msg = '密碼不能為空！'
+          self.msg = this.$t('noPassword')
           self.isPassword = true
           this.$refs['inputPassword'].focus()
         }
@@ -86,12 +88,29 @@
         if(self.msg){
           return false
         }else{
-          self.$notify({
-            message:'登錄成功',
-            type: 'success'
-          });
+          self.$http.post(`http://192.168.10.131/verifycenter/controller.php?c=li&token=${this.token}&PHPSESSID=${this.sid}`,{email:self.post.email,password:self.post.password}).then(res=>{
+            if(res.data.code==40005){
+              self.$notify({
+                message:self.$t('loginSuccess'),
+                type: 'success'
+              });
+            }else{
+              self.$notify({
+                message:self.$t('loginError'),
+                type: 'warning'
+              });
+            }
+          }).catch(err=>{
+            console.log(err)
+          })
         }
       }
+    },
+    mounted(){
+      setTimeout(()=>{
+        this.token = sessionStorage.getItem('token')
+        this.sid = sessionStorage.getItem('sid')
+      },300)
     }
   }
 </script>

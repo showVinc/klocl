@@ -1,9 +1,9 @@
 <template>
   <div class="home">
     <head-public></head-public>
-    <nav-public :type="1"></nav-public>
-    <div>
-      我是首頁內容
+    <nav-public :type="4" name="使命與管理"></nav-public>
+    <div class="publicMain">
+      使命與管理
     </div>
     <like-public></like-public>
     <foot-public></foot-public>
