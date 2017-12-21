@@ -18,23 +18,27 @@
           {
             title:'愛彼',
             content:'皇家橡樹男士腕錶',
+            img:require('../assets/images/watch/bdfl.jpg'),
             id:1
           },
           {
-            title:'理查德米勒',
+            title:'愛彼',
             content:'皇家橡樹男士腕錶',
-            id:2
+            img:require('../assets/images/watch/bdfl.jpg'),
+            id:1
           },
           {
-            title:'百達翡麗',
+            title:'愛彼',
             content:'皇家橡樹男士腕錶',
-            id:3
+            img:require('../assets/images/watch/bdfl.jpg'),
+            id:1
           },
           {
-            title:'勞力士',
+            title:'愛彼',
             content:'皇家橡樹男士腕錶',
-            id:4
-          }
+            img:require('../assets/images/watch/bdfl.jpg'),
+            id:1
+          },
         ]
       }
     }
@@ -45,7 +49,11 @@
     .publicLike{
       ul{
         li{
-          padding: 20px 30px!important;
+          img{
+            width: 210px!important;
+            height: 210px!important;
+            object-fit: cover;
+          }
         }
       }
     }
@@ -69,14 +77,14 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding: 20px 40px;
+        padding: 20px 0;
         box-sizing: border-box;
         border:1px solid #f2f2f2;
         &:hover{
           border-color: #333;
         }
         img{
-          width: 150px;
+          width: 250px;
           height: 250px;
           object-fit: cover;
         }

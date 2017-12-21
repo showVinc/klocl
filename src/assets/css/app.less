@@ -11,6 +11,7 @@ input{
   margin: 0!important;
   font-size: 14px;
   border:none;
+  outline: none;
 }
 //鼠标经过变手
 ul{
@@ -23,7 +24,7 @@ ul{
 
 input::-webkit-input-placeholder {
   /* placeholder颜色  */
-  color: #999;
+  color: #999!important;
   /* placeholder字体大小  */
   font-size: 14px;
   /* placeholder位置  */
@@ -66,6 +67,23 @@ li{
   }
 }
 
+.inputShow {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 15px;
+  span{
+    margin-bottom: 10px;
+  }
+  input {
+    border: 1px solid #f2f2f2;
+    background: #fafafa;
+    width: 100%;
+    height: 40px;
+  }
+}
+
+
 input{
   padding-left: 15px;
   box-sizing: border-box;
@@ -94,7 +112,7 @@ input{
   box-sizing: border-box;
   position: relative;
   border-bottom: 1px solid #f2f2f2;
-  div{
+  .contentShow{
     position: absolute;
     width: 300px;
     height: 80px;
@@ -119,8 +137,10 @@ input{
       }
     }
   }
-  img{
+  .isBg{
     width: 100%;
+    max-height: 500px;
+    object-fit: cover;
   }
 }
 

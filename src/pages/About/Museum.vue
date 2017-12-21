@@ -120,10 +120,11 @@
     },
     methods: {
       detailClick(item){
-        this.$router.push('/about/museumdetail')
+        this.$router.push('/about/museumDetail')
       }
     },
     created() {
+      window.scrollTo(0,0)
     },
     mounted(){
     },

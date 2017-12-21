@@ -129,21 +129,6 @@
         max-width: 500px;
         margin-right: 70px;
         flex:1;
-        .inputShow {
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-          margin-bottom: 15px;
-          span{
-            margin-bottom: 10px;
-          }
-          input {
-            border: 1px solid #f2f2f2;
-            background: #fafafa;
-            width: 100%;
-            height: 40px;
-          }
-        }
         .isLogin{
           display: flex;
           margin-top: 10px;

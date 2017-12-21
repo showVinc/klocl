@@ -3,8 +3,8 @@
     <head-public></head-public>
     <nav-public :type="4"></nav-public>
     <div class="bgImg">
-      <img src="../../assets/images/watch/watch.png">
-      <div>
+      <img class="isBg" src="../../assets/images/watch/watch.png">
+      <div class="contentShow">
         <p>
           關於我們
         </p>
@@ -21,12 +21,13 @@
 
   export default {
     data() {
-      return {}
+      return {
+      }
     },
     methods: {
-      //点击入口进入对应页面
     },
     created() {
+      window.scrollTo(0,0)
     },
     mounted(){
     },
@@ -36,5 +37,5 @@
 </script>
 <style lang="less" scoped type="text/less">
 </style>
-<style lang="less">
+<style lang="less" type="text/less">
 </style>

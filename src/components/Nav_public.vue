@@ -9,7 +9,7 @@
           {{identifyName}}
           <img src="../assets/images/about/downBlack.png">
         </p>
-        <el-select v-model="identify" @change="identifyChange">
+        <el-select v-model="identify" @change="identifyChange" class="navSelect">
           <el-option
             v-for="item in navList[1].options"
             :key="item.value"
@@ -26,7 +26,7 @@
           {{this.aboutName}}
           <img src="../assets/images/about/downBlack.png">
         </p>
-        <el-select v-model="about" @change="aboutChange">
+        <el-select v-model="about" @change="aboutChange" class="navSelect">
           <el-option
             v-for="item in navList[3].options"
             :key="item.value"
@@ -42,12 +42,13 @@
   export default {
     props:{
       name:String,
+      img:String,
       type:Number
     },
     data(){
       return {
         identify:'',
-        identifyName:'分析與鑒定',
+        identifyName:'',
         about:'',
         aboutName:'關於我們主頁',
         navList:[
@@ -55,15 +56,18 @@
             title:'腕錶百科全書'
           },
           {
-            title:'分析與鑒定',
             options:[
               {
-                value: 'jd1',
-                label: '分析與鑒定'
+                value: 'identification',
+                label: '圖片鑒定'
               },
               {
-                value: 'jd2',
-                label: '分析與鑒定2'
+                value: 'history',
+                label: '歷史持有人'
+              },
+              {
+                value: 'certificate',
+                label: '證書'
               }
             ]
           },
@@ -100,9 +104,11 @@
     methods:{
       identifyChange(){
         if(this.identify){
-          this.$router.push(`/identify`)
-        }else{
-          this.$router.push(`/identify/${this.identify}`)
+          if(this.identify=='identification'){
+            this.$router.push(`/identify`)
+          }else{
+            this.$router.push(`/identify/${this.identify}`)
+          }
         }
       },
       aboutChange(){
@@ -116,9 +122,8 @@
       }
     },
     mounted(){
-      this.aboutName = this.name?this.name:this.navList[3].options[0].label
-//      this.identifyName = this.name?this.name:this.navList[1].options[0].label
-      this.identifyName =this.navList[1].options[0].label
+      this.aboutName = this.name?this.name:'關於我們主頁'
+      this.identifyName = this.img?this.img:'分析與鑒定'
     }
   }
 </script>
@@ -172,9 +177,10 @@
 </style>
 <style lang="less" type="text/less">
   .publicNav{
-    .el-select{
-      position: absolute;
+    .navSelect{
+      position: absolute!important;
       opacity: 0;
+      width: 130px!important;
     }
     .el-icon-caret-top:before {
       content: "\E603";
@@ -183,7 +189,7 @@
     .el-input__inner{
       border:none!important;
       color: #212125;
-      width: 130px;
+      width: 130px!important;
     }
   }
   .el-select-dropdown__item.selected.hover{

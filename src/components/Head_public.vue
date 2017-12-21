@@ -123,6 +123,7 @@
       border:none!important;
       color: #212125;
       width: 100px;
+      background: none!important;
     }
   }
   .el-select-dropdown__item.selected.hover{

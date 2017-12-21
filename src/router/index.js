@@ -47,6 +47,21 @@ export default new Router({
       name: 'Identify',
       component: resolve=>require(['@/pages/Identify/Index'],resolve)
     },
+    {
+      path: '/identify/history',
+      name: 'IdentifyHistory',
+      component: resolve=>require(['@/pages/Identify/History'],resolve)
+    },
+    {
+      path: '/identify/historyDetail',
+      name: 'IdentifyHistoryDetail',
+      component: resolve=>require(['@/pages/Identify/HistoryDetail'],resolve)
+    },
+    {
+      path: '/identify/certificate',
+      name: 'IdentifyCertificate',
+      component: resolve=>require(['@/pages/Identify/Certificate'],resolve)
+    },
     //新闻类
     {
       path: '/news',
@@ -80,9 +95,9 @@ export default new Router({
       component: resolve=>require(['@/pages/About/Museum'],resolve)
     },
     {
-      path: '/about/museumdetail',
+      path: '/about/museumDetail',
       name: 'AboutMuseumDetail',
-      component: resolve=>require(['@/pages/About/Museumdetail'],resolve)
+      component: resolve=>require(['@/pages/About/MuseumDetail'],resolve)
     },
     {
       path: '/about/contact',
