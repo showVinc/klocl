@@ -28,6 +28,59 @@
           <div class="infoTit">
             個人資料
           </div>
+          <div class="infoMain">
+            <div class="inputShow">
+              <span>{{$t('email')}}</span>
+              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
+              <div class="errInfo">
+                <transition name="fade">
+                  <p v-show="isName">{{msg}}</p>
+                </transition>
+              </div>
+            </div>
+            <div class="inputShow">
+              <span>姓氏</span>
+              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
+              <div class="errInfo">
+                <transition name="fade">
+                  <p v-show="isName">{{msg}}</p>
+                </transition>
+              </div>
+            </div>
+            <div class="inputShow">
+              <span>性別</span>
+              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
+              <div class="errInfo">
+                <transition name="fade">
+                  <p v-show="isName">{{msg}}</p>
+                </transition>
+              </div>
+            </div>
+            <div class="inputShow">
+              <span>出生日期</span>
+              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
+              <div class="errInfo">
+                <transition name="fade">
+                  <p v-show="isName">{{msg}}</p>
+                </transition>
+              </div>
+            </div>
+            <div class="inputShow">
+              <span>電話號碼</span>
+              <div class="inputWrap">
+                <span>+86 <img src="../../assets/images/public_img/down.png"></span>
+                <input type="text" v-model="post.tel" :class="{'active':isName}" ref="inputTel" @blur="errBlur">
+              </div>
+              <div class="errInfo">
+                <transition name="fade">
+                  <p v-show="isName">{{msg}}</p>
+                </transition>
+              </div>
+            </div>
+          </div>
+          <div class="saveBtn">
+            <p>保存</p>
+          </div>
         </div>
       </div>
     </div>
@@ -39,10 +92,22 @@
   export default {
     data() {
       return {
-
+        isName:false,
+        msg:'',
+        post:{
+          name:'',
+          surname:'',
+          gender:'',
+          date:'',
+          tel:''
+        }
       }
     },
     methods: {
+      errBlur(){
+        let self = this
+        self.isName = false
+      },
     },
     created() {
     },
@@ -107,6 +172,66 @@
               display: flex;
               align-items: center;
             }
+          }
+        }
+      }
+      .info{
+        padding-bottom: 100px;
+        .infoTit{
+          font-size: 24px;
+          padding: 50px 0 40px;
+        }
+        .infoMain{
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
+          .inputShow{
+            width: 45%;
+            font-size: 14px;
+            .inputWrap{
+              position: relative;
+              display: flex;
+              border:1px solid #f2f2f2;
+              span{
+                margin: 0;
+                width: 75px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #fafafa;
+                position: relative;
+                &:before{
+                  content: '';
+                  width: 1px;
+                  height: 20px;
+                  background: #e6e6e6;
+                  position: absolute;
+                  right: 0;
+                  top: calc(~'50% - 10px');
+                }
+                img{
+                  margin-left: 10px;
+                }
+              }
+              input{
+                width: calc(~'100% - 75px');
+                border:none;
+              }
+            }
+          }
+        }
+        .saveBtn{
+          display: flex;
+          p{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fafafa;
+            background: #333;
+            min-width: 110px;
+            height: 40px;
+            font-size: 14px;
+            border-radius: 2px;
           }
         }
       }
