@@ -10,7 +10,6 @@
           </div>
           <div class="museumBannerMain">
             <span class="pageBtn">
-              <!--<img src="../../assets/images/museum/left.png">-->
             </span>
             <ul>
               <li v-for="item in lists.list" @click="detailClick(item)">
@@ -23,7 +22,6 @@
               </li>
             </ul>
             <span class="pageBtn">
-              <!--<img src="../../assets/images/museum/right.png">-->
             </span>
           </div>
         </div>
@@ -182,7 +180,6 @@
           width: 50px;
           height: 50px;
           display: block;
-          /*margin: 0 15px;*/
           transition: 0.5s all;
           &:first-child{
             background-image: url("../../assets/images/museum/left.png");
@@ -206,7 +203,6 @@
           box-sizing: border-box;
           li{
             width: 25%;
-            padding: 0 30px;
             box-sizing: border-box;
             margin-right: 25px;
             height: 300px;
@@ -220,10 +216,11 @@
             }
             p{
               margin: 10px 0 10px;
+              font-weight: bold;
             }
             img{
-              width: 116px;
-              height: 200px;
+              width: 180px;
+              height: 180px;
               object-fit: cover
             }
             span{

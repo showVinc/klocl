@@ -80,12 +80,13 @@
         padding: 20px 0;
         box-sizing: border-box;
         border:1px solid #f2f2f2;
+        transition: 0.5s all;
         &:hover{
           border-color: #333;
         }
         img{
-          width: 250px;
-          height: 250px;
+          width: 220px;
+          height: 220px;
           object-fit: cover;
         }
         p{

@@ -41,6 +41,17 @@ export default new Router({
       name: 'LoginSuccess',
       component: resolve=>require(['@/pages/Login/Success'],resolve)
     },
+    //品牌类
+    {
+      path: '/brand',
+      name: 'Brand',
+      component: resolve=>require(['@/pages/Brand/Index'],resolve)
+    },
+    {
+      path: '/brand/detail',
+      name: 'BrandDetail',
+      component: resolve=>require(['@/pages/Brand/Detail'],resolve)
+    },
     //鉴定类
     {
       path: '/identify',
@@ -103,6 +114,17 @@ export default new Router({
       path: '/about/contact',
       name: 'AboutContact',
       component: resolve=>require(['@/pages/About/Contact'],resolve)
+    },
+    //用户类
+    {
+      path: '/user',
+      name: 'User',
+      component: resolve=>require(['@/pages/User/Index'],resolve)
+    },
+    {
+      path: '/user/identify',
+      name: 'UserIdentify',
+      component: resolve=>require(['@/pages/User/Identify'],resolve)
     },
   ]
 })

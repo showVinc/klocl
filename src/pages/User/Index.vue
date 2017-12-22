@@ -10,58 +10,17 @@
       </el-carousel>
     </div>
     <div class="publicMain">
-      <div class="brand">
-        <div class="brandTit">
-          品牌
-        </div>
-        <ul>
-          <li v-for="item in lists.list" @click="brandClick(item)">
-            <img :src="item.img" alt="">
-          </li>
-        </ul>
-        <div class="moreBtn">
-          <p>
-            查看更多
-          </p>
-        </div>
-      </div>
     </div>
     <like-public></like-public>
     <foot-public></foot-public>
   </div>
 </template>
 <script>
-
   export default {
     data() {
       return {
         lists:{
-          list:[
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:1
-            },
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:2
-            },
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:2
-            },
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:2
-            },
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:2
-            },
-            {
-              img:require('../assets/images/watch/bdfl.jpg'),
-              id:2
-            }
-          ],
+          list:[],
           page:{
             p:1,
             total_pages:1
