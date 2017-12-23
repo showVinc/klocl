@@ -65,12 +65,13 @@
   }
   #app{
     max-width: 1200px;
-    min-height: calc(~'100vh - 120px');
+    min-height: calc(~'100vh - 270px');
     margin: 0 auto;
     min-width: 1024px;
     background: #fff;
     position: relative;
-    margin-top: 150px;
-    margin-bottom: 120px;
+    padding-top: 150px;
+    padding-bottom: 120px;
+    /*margin-bottom: 30px;*/
   }
 </style>

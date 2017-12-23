@@ -107,6 +107,7 @@
       }
     },
     mounted(){
+      localStorage.removeItem('userId')
       setTimeout(()=>{
         this.token = sessionStorage.getItem('token')
         this.sid = sessionStorage.getItem('sid')
@@ -132,6 +133,7 @@
         .isLogin{
           display: flex;
           margin-top: 10px;
+          font-size: 14px;
           div{
             min-width: 110px;
             height: 40px;

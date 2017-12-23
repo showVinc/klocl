@@ -9,9 +9,9 @@
         <div class="successMain">
           <img src="../../assets/images/public_img/success.png">
           <p v-if="key==1">恭喜你！已经获得鉴定中心账号！{{num}}s后返回首页。</p>
-          <p v-if="key==2">密码修改成功，请重新登录！{{num}}s后进入登录页。</p>
+          <p v-if="key==2||key==3">密码修改成功，请重新登录！{{num}}s后进入登录页。</p>
         </div>
-        <div class="isLogin" @click="$router.push('/login')">
+        <div class="isLogin" @click="loginClick">
           {{subBtn}}
         </div>
       </div>
@@ -39,37 +39,21 @@
         let self = this
         self.isShow = false
       },
-      sub(){
-        let self = this
-        let regEmail = /^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$/
-        self.msg = ''
-        if(!self.post.email){
-          self.msg = this.$t('noEmail')
-        }else if(!regEmail.test(self.post.email)){
-          self.msg = this.$t('errEmail')
-        }
-
-        if(self.msg){
-          self.isShow = true
-          this.$refs['input'].focus()
-          return false
-        }else{
-          self.isShow = false
-          self.$notify({
-            message:this.$t('postSuccess'),
-            type: 'success'
-          });
-          self.$router.push('/login/modify')
-        }
-      }
+      loginClick(){
+        this.$router.push('/login')
+      },
     },
     created(){
       let self = this
+      window.scrollTo(0,0)
       if(self.$fun.GetQueryString('key','login/success')==1){
         self.title = this.$t('registerSuccess')
         self.subBtn = this.$t('goHome')
       }else if(self.$fun.GetQueryString('key','login/success')==2){
         self.title = this.$t('modifySuccess')
+        self.subBtn = this.$t('goLogin')
+      }else if(self.$fun.GetQueryString('key','login/success')==3){
+        self.title = this.$t('settingSuccess')
         self.subBtn = this.$t('goLogin')
       }else{
         self.$router.push('/login')
@@ -77,14 +61,16 @@
       }
       self.key = self.$fun.GetQueryString('key','login/success')
       let timeShow = setInterval(function () {
-        if (self.num <= 0) {
+        if(self.$route.name!='LoginSuccess'){
+          clearInterval(timeShow)
+          return false
+        }else if (self.num <= 0&&self.$route.name=='LoginSuccess') {
           self.$router.push('/login')
           clearInterval(timeShow)
         } else {
           self.num--
         }
       }, 1000)
-
     },
     mounted(){
     }

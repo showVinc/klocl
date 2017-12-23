@@ -122,6 +122,11 @@ export default new Router({
       component: resolve=>require(['@/pages/User/Index'],resolve)
     },
     {
+      path: '/user/password',
+      name: 'UserPassword',
+      component: resolve=>require(['@/pages/User/Password'],resolve)
+    },
+    {
       path: '/user/identify',
       name: 'UserIdentify',
       component: resolve=>require(['@/pages/User/Identify'],resolve)

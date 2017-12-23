@@ -46,7 +46,7 @@
     justify-content: space-between;
     align-items: center;
     position: absolute;
-    bottom: -120px;
+    bottom: 0;
     width: 100%;
     min-width: 1024px;
     max-width: 1200px;

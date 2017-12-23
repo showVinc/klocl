@@ -209,6 +209,7 @@
         img{
           width: 230px;
           height: 230px;
+          object-fit: cover;
         }
         p{
           margin: 10px 0;

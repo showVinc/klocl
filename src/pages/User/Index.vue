@@ -6,7 +6,7 @@
       <div class="userLeft">
         <ul>
           <li class="active">個人中心</li>
-          <li>鑒定記錄</li>
+          <li @click="$router.push('/user/identify')">鑒定記錄</li>
         </ul>
       </div>
       <div class="userRight">
@@ -21,70 +21,96 @@
             <div>賬戶：</div><p>1104923110@qq.com</p>
           </div>
           <div class="psw">
-            <div>密碼：</div><p>******<span><img src="../../assets/images/public_img/arrow.png">重置密碼</span></p>
+            <div>密碼：</div><p @click="passwordClick">******<span><img src="../../assets/images/public_img/arrow.png">重置密碼</span></p>
           </div>
         </div>
-        <div class="info">
+        <div class="info" v-if="info.isShow==0">
           <div class="infoTit">
             個人資料
           </div>
           <div class="infoMain">
             <div class="inputShow">
-              <span>{{$t('email')}}</span>
-              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
-              <div class="errInfo">
-                <transition name="fade">
-                  <p v-show="isName">{{msg}}</p>
-                </transition>
-              </div>
+              <span>姓名</span>
+              <input type="text" v-model="post.name">
             </div>
             <div class="inputShow">
               <span>姓氏</span>
-              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
-              <div class="errInfo">
-                <transition name="fade">
-                  <p v-show="isName">{{msg}}</p>
-                </transition>
-              </div>
+              <input type="text" v-model="post.surname">
             </div>
             <div class="inputShow">
               <span>性別</span>
-              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
-              <div class="errInfo">
-                <transition name="fade">
-                  <p v-show="isName">{{msg}}</p>
-                </transition>
-              </div>
+              <el-select v-model="post.gender" class="genderSelect">
+                <el-option
+                  v-for="item in genderList"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </div>
             <div class="inputShow">
               <span>出生日期</span>
-              <input type="text" v-model="post.name" :class="{'active':isName}" ref="inputName" @blur="errBlur">
-              <div class="errInfo">
-                <transition name="fade">
-                  <p v-show="isName">{{msg}}</p>
-                </transition>
+              <div class="block dateShow">
+                <el-date-picker
+                  v-model="post.date"
+                  type="date"
+                  placeholder="选择日期">
+                </el-date-picker>
               </div>
             </div>
             <div class="inputShow">
               <span>電話號碼</span>
               <div class="inputWrap">
                 <span>+86 <img src="../../assets/images/public_img/down.png"></span>
-                <input type="text" v-model="post.tel" :class="{'active':isName}" ref="inputTel" @blur="errBlur">
-              </div>
-              <div class="errInfo">
-                <transition name="fade">
-                  <p v-show="isName">{{msg}}</p>
-                </transition>
+                <input type="text" v-model="post.tel">
               </div>
             </div>
           </div>
-          <div class="saveBtn">
-            <p>保存</p>
+          <div class="loginBtn">
+            <p @click="saveBtn">保存</p>
           </div>
+        </div>
+        <div class="infoSuccess" v-if="info.isShow==1">
+          <div class="infoTit">
+            個人資料
+          </div>
+          <ul>
+            <li>
+              <div>
+                姓名：
+              </div>
+              <span>
+                {{info.name}} {{info.surname}}
+              </span>
+            </li>
+            <li>
+              <div>
+                性別：
+              </div>
+              <span>
+                {{info.gender}}
+              </span>
+            </li>
+            <li>
+              <div>
+                出生日期：
+              </div>
+              <span>
+                {{info.date}}
+              </span>
+            </li>
+            <li>
+              <div>
+                電話號碼：
+              </div>
+              <span>
+                {{info.tel}}
+              </span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
-    <like-public></like-public>
     <foot-public></foot-public>
   </div>
 </template>
@@ -92,8 +118,25 @@
   export default {
     data() {
       return {
-        isName:false,
-        msg:'',
+        info:{
+          name:'vinc',
+          surname:'demo',
+          gender:1,
+          date:'2017-12-12',
+          tel:13800138000,
+          isShow:1,
+          email:'110423@qq.com'
+        },
+        genderList:[
+          {
+            value:'1',
+            label:'男'
+          },
+          {
+            value:'2',
+            label:'女'
+          }
+        ],
         post:{
           name:'',
           surname:'',
@@ -104,10 +147,25 @@
       }
     },
     methods: {
-      errBlur(){
-        let self = this
-        self.isName = false
+      passwordClick(){
+        this.$router.push(`/user/password?email=${this.info.email}`)
       },
+      saveBtn(){
+        let self = this
+        if(self.post.name||self.post.surname||self.post.gender||self.post.date||self.post.tel){
+          this.info.isShow = 1
+          return false
+          //self.$http.post(`/demo`,{post}).then(res=>{
+//            if(res.data.errcode=='0'){
+//              self.$router.push(`/user/success`)
+//            }
+//          }).catch(err=>{
+//            console.log(err)
+//          })
+        }else{
+          return false
+        }
+      }
     },
     created() {
     },
@@ -121,6 +179,8 @@
   .publicUser {
     padding: 50px 50px 0;
     display: flex;
+    min-height:calc(~'100vh - 270px');
+    box-sizing: border-box;
     .userLeft{
       margin-right: 40px;
       ul{
@@ -171,6 +231,30 @@
               margin-left: 40px;
               display: flex;
               align-items: center;
+              img{
+                margin-right: 10px;
+              }
+            }
+          }
+        }
+      }
+      .infoSuccess{
+        padding-bottom: 100px;
+        .infoTit{
+          font-size: 24px;
+          padding: 50px 0 40px;
+        }
+        ul{
+          li{
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            p{
+              color: #333;
+            }
+            span{
+              color: #999;
             }
           }
         }
@@ -218,20 +302,9 @@
                 border:none;
               }
             }
-          }
-        }
-        .saveBtn{
-          display: flex;
-          p{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fafafa;
-            background: #333;
-            min-width: 110px;
-            height: 40px;
-            font-size: 14px;
-            border-radius: 2px;
+            .genderSelect{
+              border:1px solid #f2f2f2!important;
+            }
           }
         }
       }
@@ -239,4 +312,12 @@
   }
 </style>
 <style lang="less" type="text/less">
+  .dateShow{
+    .el-date-editor.el-input{
+      width: 100%;
+    }
+    input{
+      border:1px solid #f2f2f2!important;
+    }
+  }
 </style>

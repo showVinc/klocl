@@ -7,9 +7,9 @@
       <li :class="{navActive:type==2}">
         <p>
           {{identifyName}}
-          <img src="../assets/images/about/downBlack.png">
+          <img src="../assets/images/about/downBlack.png" :class="{'active':isIdentify}">
         </p>
-        <el-select v-model="identify" @change="identifyChange" class="navSelect">
+        <el-select v-model="identify" @change="identifyChange" class="navSelect" @visible-change="identifyShow">
           <el-option
             v-for="item in navList[1].options"
             :key="item.value"
@@ -24,9 +24,9 @@
       <li :class="{navActive:type==4}">
         <p>
           {{this.aboutName}}
-          <img src="../assets/images/about/downBlack.png">
+          <img src="../assets/images/about/downBlack.png" :class="{'active':isAbout}">
         </p>
-        <el-select v-model="about" @change="aboutChange" class="navSelect">
+        <el-select v-model="about" @change="aboutChange" class="navSelect" @visible-change="aboutShow">
           <el-option
             v-for="item in navList[3].options"
             :key="item.value"
@@ -47,6 +47,8 @@
     },
     data(){
       return {
+        isIdentify:false,
+        isAbout:false,
         identify:'',
         identifyName:'',
         about:'',
@@ -102,6 +104,12 @@
       }
     },
     methods:{
+      identifyShow(){
+        this.isIdentify = !this.isIdentify
+      },
+      aboutShow(){
+        this.isAbout = !this.isAbout
+      },
       identifyChange(){
         if(this.identify){
           if(this.identify=='identification'){
@@ -157,6 +165,10 @@
           img{
             width: 8px;
             margin-left: 10px;
+            transition: 0.5s all;
+            &.active{
+              transform: rotate(180deg);
+            }
           }
         }
         &.navActive{
